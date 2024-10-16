@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to custom styles -->
     <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Link to FullCalendar CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css">
+    <!-- Include FullCalendar JS -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <!-- Link to custom calendar JS, loaded defer to ensure DOM is ready -->
     <script src="/static/js/calendar.js" defer></script>
     <title>Calendar</title>
 </head>
 <body>
+    <!-- Calendar container -->
     <div id="calendar"></div>
+    
+    <!-- Form to add shift details -->
     <form action="/add_shift" method="post">
-        <!-- Form to add shift details -->
+        <!-- Input for shift title -->
+        <label for="shift_title">Shift Title:</label>
+        <input type="text" id="shift_title" name="shift_title" required>
+        
+        <!-- Input for shift date -->
+        <label for="shift_date">Shift Date:</label>
+        <input type="date" id="shift_date" name="shift_date" required>
+        
+        <!-- Input for shift time -->
+        <label for="shift_time">Shift Time:</label>
+        <input type="time" id="shift_time" name="shift_time" required>
+        
+        <!-- Submit button to add shift -->
         <button type="submit">Add Shift</button>
     </form>
 </body>
