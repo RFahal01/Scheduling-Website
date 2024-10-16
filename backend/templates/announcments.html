@@ -9,4 +9,11 @@
 <body>
     <div class="announcements-container">
         <h1>Announcements</h1>
-        <div id="announcement-content">
+    <div id="announcement-content">
+    </div>
+        {% if 'admin_authenticated' in session %}
+            <a href="/edit_announcements">Edit Announcements</a>
+        {% endif %}
+    </div>
+</body>
+</html>
