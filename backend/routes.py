@@ -6,15 +6,10 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 def setup_routes(app):
-    @app.route('/')
+    @app.route('/', methods=['GET', 'POST'])
     def index():
-        # Render the index page with the login form
-        return render_template('index.html')
-
-    @app.route('/login', methods=['GET', 'POST'])
-    def login():
         if request.method == 'POST':
-            # Get the password from the form
+            # Process the login form
             password = request.form.get('password')
             # Check if the password matches 'Hawk123'
             if password == 'Hawk123':
@@ -30,7 +25,7 @@ def setup_routes(app):
                 # Flash an error message if the password is invalid
                 flash('Invalid password.')
                 return redirect(url_for('index'))
-        # For a GET request, render the login form again
+        # Render the login page for GET requests
         return render_template('index.html')
 
     @app.route('/calendar')
