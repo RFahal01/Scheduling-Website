@@ -1,15 +1,23 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from auth import check_password, require_login
+from auth import require_login
 from utils import send_email
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 def setup_routes(app):
-    @app.route('/', methods=['GET', 'POST'])
+    @app.route('/', methods=['GET'])
     def index():
+        # Render the index page with the login form
+        return render_template('index.html')
+
+    @app.route('/login', methods=['GET', 'POST'])
+    def login():
         if request.method == 'POST':
-            # Process the login form
+            # Log to see if this part is being reached
+            print("POST request to /login received")
+            
+            # Get the password from the form
             password = request.form.get('password')
             # Check if the password matches 'Hawk123'
             if password == 'Hawk123':
@@ -25,7 +33,7 @@ def setup_routes(app):
                 # Flash an error message if the password is invalid
                 flash('Invalid password.')
                 return redirect(url_for('index'))
-        # Render the login page for GET requests
+        # For a GET request, render the login form again
         return render_template('index.html')
 
     @app.route('/calendar')
