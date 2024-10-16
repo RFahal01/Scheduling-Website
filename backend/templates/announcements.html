@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link to custom styles -->
     <link rel="stylesheet" href="/static/css/styles.css">
     <title>Announcements</title>
 </head>
 <body>
-    <!-- Container for announcements -->
     <div class="announcements-container">
         <h1>Announcements</h1>
-        <!-- Content area for announcements -->
         <div id="announcement-content">
-            <!-- Announcements will be dynamically loaded here -->
+            <!-- Placeholder for announcements content -->
         </div>
-        {% if 'admin_authenticated' in session %}
-            <a href="/edit_announcements">Edit Announcements</a>
-        {% endif %}
+        <a href="/edit_announcements"><button>Edit Announcements</button></a>
     </div>
 </body>
 </html>

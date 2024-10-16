@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-.login-container,
+.main-container,
 .edit-announcements-container,
 .announcements-container {
     max-width: 500px;
