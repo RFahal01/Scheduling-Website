@@ -11,13 +11,41 @@
     <!-- Container for login form -->
     <div class="login-container">
         <h1>Enter Password</h1>
+        <!-- Flash messages display -->
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         <!-- Form to submit password for login -->
-        <form action="/login" method="post">
-            <!-- Input field for password -->
-            <input type="password" name="password" placeholder="Enter password" required>
+        <form action="/login" method="POST">
+            <!-- Input field for password with visibility toggle -->
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+                <button type="button" onclick="togglePasswordVisibility()">Show</button>
+            </div>
             <!-- Submit button for login -->
             <button type="submit">Login</button>
         </form>
     </div>
+    <!-- Script for password visibility toggle -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+        }
+    </script>
+    <!-- Loading animation script -->
+    <script>
+        document.querySelector("form").addEventListener("submit", function() {
+            document.querySelector("button[type='submit']").innerHTML = "Loading...";
+            document.querySelector("button[type='submit']").disabled = true; // Prevent multiple form submissions
+        });
+    </script>
 </body>
 </html>

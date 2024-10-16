@@ -11,24 +11,27 @@ def setup_routes(app):
         # Render the index page with the login form
         return render_template('index.html')
 
-    @app.route('/login', methods=['POST'])
+    @app.route('/login', methods=['GET', 'POST'])
     def login():
-        # Get the password from the form
-        password = request.form.get('password')
-        # Check if the password matches 'Hawk123'
-        if password == 'Hawk123':
-            session['authenticated'] = True
-            # Redirect to the calendar page if authenticated
-            return redirect(url_for('calendar'))
-        # Check if the password matches 'MyPassword'
-        elif password == 'MyPassword':
-            session['admin_authenticated'] = True
-            # Redirect to the announcements page if admin authenticated
-            return redirect(url_for('announcements'))
-        else:
-            # Flash an error message if the password is invalid
-            flash('Invalid password.')
-            return redirect(url_for('index'))
+        if request.method == 'POST':
+            # Get the password from the form
+            password = request.form.get('password')
+            # Check if the password matches 'Hawk123'
+            if password == 'Hawk123':
+                session['authenticated'] = True
+                # Redirect to the calendar page if authenticated
+                return redirect(url_for('calendar'))
+            # Check if the password matches 'MyPassword'
+            elif password == 'MyPassword':
+                session['admin_authenticated'] = True
+                # Redirect to the announcements page if admin authenticated
+                return redirect(url_for('announcements'))
+            else:
+                # Flash an error message if the password is invalid
+                flash('Invalid password.')
+                return redirect(url_for('index'))
+        # For a GET request, render the login form again
+        return render_template('index.html')
 
     @app.route('/calendar')
     @require_login
@@ -43,6 +46,7 @@ def setup_routes(app):
         return render_template('announcements.html')
 
     @app.route('/edit_announcements', methods=['GET', 'POST'])
+    @require_login
     def edit_announcements():
         # Check if the user is admin authenticated
         if 'admin_authenticated' not in session:
