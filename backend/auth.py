@@ -1,4 +1,5 @@
-from functools import wraps
+'''
+ from functools import wraps
 from flask import session, redirect, url_for, flash
 
 # Function to check if the provided password is valid
@@ -21,3 +22,4 @@ def require_login(f):
         # Call the original function if the user is authenticated
         return f(*args, **kwargs)
     return decorated_function
+    '''
